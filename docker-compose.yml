@@ -11,3 +11,5 @@ services:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
+backend:
+    build:
