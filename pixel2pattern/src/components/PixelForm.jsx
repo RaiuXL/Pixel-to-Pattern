@@ -9,6 +9,8 @@ import DrawIcon from '@mui/icons-material/Draw';
 import {useEffect, useState} from "react";
 import { useRouter } from 'next/navigation';
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 export default function PixelForm() {
     // form detail states
     const [name, setName] = useState("");
@@ -72,7 +74,7 @@ export default function PixelForm() {
         }
 
         try{
-            const res = await fetch('http://localhost:3001/patterns',
+            const res = await fetch(`${apiUrl}/patterns`,
                 {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},

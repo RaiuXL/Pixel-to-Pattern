@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import PixelPost from "./PixelPost.jsx";
 import Link from "next/link.js";
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 export default function PostsCollection() {
 
     const [ pixelPosts, setPixelPosts] = useState([]);
@@ -9,7 +12,7 @@ export default function PostsCollection() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await fetch("http://localhost:3001/patterns");
+                 const res = await fetch(`${apiUrl}/patterns`);
                 if (!res.ok) throw new Error("failed to fetch posts");
                 const posts = await res.json();
                 setPixelPosts(posts);

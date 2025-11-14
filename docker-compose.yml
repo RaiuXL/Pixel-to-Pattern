@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   db:
     image: mysql:8.0
@@ -12,7 +14,7 @@ services:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
-    healthcheck:           
+    healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
       interval: 5s
       timeout: 5s
@@ -31,12 +33,13 @@ services:
       DB_PASSWORD: password
       DB_NAME: pixel2pattern
       DB_DIALECT: mysql
+      PORT: 3001
     depends_on:
       db:
         condition: service_healthy
     ports:
       - "3001:3001"
-    command: sh -c "sleep 10 && npm run dev"  
+    command: sh -c "sleep 10 && npm run dev"
 
   frontend:
     build:
@@ -45,9 +48,12 @@ services:
     restart: always
     depends_on:
       - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://143.244.187.217:3001
     ports:
       - "3000:3000"
-    command: sh -c "npm run dev"           
+    command: sh -c "npm run dev"
+
 
 volumes:
   db-data:

@@ -24,10 +24,12 @@ export default function PatternPage({params}) {
       setEditView(true);
     }
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
     useEffect(()=> {
         const fetchPost = async () => {
             try{
-                const res = await fetch(`http://localhost:3001/patterns/${id}`);
+                const res = await fetch(`${apiUrl}/patterns/${id}`);
                 if(!res.ok) throw new Error(`Failed to fetch post with ID: ${id}`);
                 const post = await res.json();
                 setPost(post);
@@ -82,8 +84,5 @@ export default function PatternPage({params}) {
       </Box>
     </ Box>
   );
-
-
-
 
 }

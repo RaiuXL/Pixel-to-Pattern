@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import PixelDisplay from "@/components/PixelDisplay";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 export default function EditablePatternView({ post, onCancel, params}) {
     const { id } = useParams();
     const [formData, setFormData] = useState({
@@ -24,7 +26,7 @@ export default function EditablePatternView({ post, onCancel, params}) {
 
   const handleSubmit = async(e) => {
     try{
-        const res = await fetch(`http://localhost:3001/update/${id}`,
+        const res = await fetch(`${apiUrl}/update/${id}`,
             {
                 method: 'PATCH',
                 headers: {"Content-Type": "application/json"},
