@@ -203,3 +203,5 @@ Database connection issues
 
 Make sure DB_HOST=db in db.env when using Docker.
 Ensure DB_USER, DB_PASSWORD, and DB_NAME match the values in docker-compose.yml.
+
+#creating the deploy.sh file
