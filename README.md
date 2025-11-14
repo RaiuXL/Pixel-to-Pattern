@@ -80,3 +80,5 @@ Restart your development server if it's already running (e.g., npm start).
 ## Deployment Process
 Linked below is the documentation that was created while setting up the virtual machine for deployment.
 [Click Here!](https://loving-eye-8b5.notion.site/VM-Deployment-27e101a39e1480328574fee619f042d8)
+
+updating readme file
