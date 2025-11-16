@@ -26,21 +26,25 @@ export default function PatternPage({params}) {
 
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-    useEffect(()=> {
+        useEffect(() => {
         const fetchPost = async () => {
-            try{
-                const res = await fetch(`${apiUrl}/patterns/${id}`);
-                if(!res.ok) throw new Error(`Failed to fetch post with ID: ${id}`);
-                const post = await res.json();
-                setPost(post);
-                setPatternConfig(post.pattern_info);
-            } catch(err){
-                console.error('Failed to fetch post, ', err);
-            }
-        }
+            try {
+              const API_BASE_URL =
+                process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-        fetchPost();
-    }, []);
+              const res = await fetch(`${API_BASE_URL}/patterns/${id}`);
+              if (!res.ok) {
+                throw new Error("Failed to fetch pattern");
+              }
+              const data = await res.json();
+              setPattern(data);
+            } catch (err) {
+              console.error("Failed to fetch post", err);
+            }
+          };
+
+      fetchPost();
+    }, [id]);
 
     if (!post) return <Typography>Loading...</Typography>
 
