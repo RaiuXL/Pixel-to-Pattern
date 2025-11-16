@@ -190,7 +190,6 @@ docker volume inspect <project-folder>_db-data
 ----
 
 🧰 Quick Troubleshooting
-
 Check containers and logs
 
 docker compose ps
@@ -198,10 +197,58 @@ docker compose logs -f db
 docker compose logs -f backend
 docker compose logs -f frontend
 
-
 Database connection issues
 
 Make sure DB_HOST=db in db.env when using Docker.
 Ensure DB_USER, DB_PASSWORD, and DB_NAME match the values in docker-compose.yml.
 
-#creating the deploy.sh file
+
+## 🐚 Docker Deployment Script
+
+To automate VM provisioning and Docker-based deployment, this project includes a bash script named `deploy_docker.sh`.  
+You can run this script on a **fresh Ubuntu VM** to install everything and start the app.
+
+### ✅ What the Script Does
+
+When you run `deploy_docker.sh`, it:
+
+- Updates the system packages
+- Installs Git
+- Installs Docker and the Docker Compose plugin
+- Configures Docker to start automatically on boot
+- Clones the Pixel to Pattern repository from GitHub
+- Builds the Docker images and starts all services with `docker compose up -d`
+- Prints clear progress messages at each step so you can see what’s happening
+
+After the script completes successfully, the application is available at:
+- **Frontend:** `http://<YOUR_VM_IP>:3000`
+- **Backend API:** `http://<YOUR_VM_IP>:3001/patterns`
+Replace `<YOUR_VM_IP>` with the IP address of your VM.
+
+
+### ▶️ How to Use `deploy_docker.sh`
+
+1. **SSH into your Ubuntu VM:**
+
+```bash
+ssh root@<YOUR_VM_IP>
+```
+Place the script on the VM
+If it’s in the repo already, cd into the repo first. Otherwise, create the file and paste the script contents.
+Make the script executable and run it:
+
+```bash
+chmod +x deploy_docker.sh
+./deploy_docker.sh
+```
+Verify containers are running:
+
+```bash
+docker compose ps
+```
+You should see the frontend, backend, and db services in the Up state.
+Open the app in a browser:
+
+http://<YOUR_VM_IP>:3000
+📦 Archived Non-Docker Deployment Scripts
+Any older scripts used for direct VM deployment without Docker from earlier sprints have been moved to an archive folder so they are not confused with the Docker-based workflow.
