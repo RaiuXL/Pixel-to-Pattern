@@ -24,27 +24,26 @@ export default function PatternPage({params}) {
       setEditView(true);
     }
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
-
         useEffect(() => {
-        const fetchPost = async () => {
-            try {
-              const API_BASE_URL =
+         const fetchPost = async () => {
+          try {
+            const apiBaseUrl =
                 process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-              const res = await fetch(`${API_BASE_URL}/patterns/${id}`);
-              if (!res.ok) {
-                throw new Error("Failed to fetch pattern");
-              }
-              const data = await res.json();
-              setPattern(data);
-            } catch (err) {
-              console.error("Failed to fetch post", err);
+            const res = await fetch(`${apiBaseUrl}/patterns/${id}`);
+            if (!res.ok) {
+                throw new Error(`Failed to fetch post with ID: ${id}`);
             }
-          };
 
-      fetchPost();
-    }, [id]);
+            const post = await res.json();
+            setPost(post);
+          } catch (err) {
+            console.error("Failed to fetch post", err);
+         }
+    };
+
+    fetchPost();
+}, [id]);
 
     if (!post) return <Typography>Loading...</Typography>
 
