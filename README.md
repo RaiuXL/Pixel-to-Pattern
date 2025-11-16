@@ -248,7 +248,4 @@ docker compose ps
 ```
 You should see the frontend, backend, and db services in the Up state.
 Open the app in a browser:
-
 http://<YOUR_VM_IP>:3000
-📦 Archived Non-Docker Deployment Scripts
-Any older scripts used for direct VM deployment without Docker from earlier sprints have been moved to an archive folder so they are not confused with the Docker-based workflow.
